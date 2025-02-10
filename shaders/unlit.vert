@@ -3,5 +3,5 @@
 layout (location = 0) in vec2 vertexPosition;
 
 void main() {
-    gl_Position = vec3(vertexPosition, 0)
+    gl_Position = vec4(vertexPosition, 0, 1);
 }

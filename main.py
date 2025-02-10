@@ -2,6 +2,8 @@ import pygame
 from OpenGL.GL import *
 import numpy
 
+from shader import Shader
+
 SHADERS_DIR = "./shaders"
 
 screen = pygame.display.set_mode((800, 600), pygame.OPENGL | pygame.DOUBLEBUF)
@@ -14,6 +16,8 @@ vertices = numpy.array([
      0,  1,
      1, -1
 ], dtype=numpy.float32)
+
+shader = Shader(f"{SHADERS_DIR}/unlit.vert", f"{SHADERS_DIR}/unlit.frag")
 
 vao = glGenVertexArrays(1)
 vbo = glGenBuffers(1)
@@ -29,9 +33,11 @@ while not close:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             close = True
-
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glClearColor(BG[0], BG[1], BG[2], BG[3])
+
+    shader.use()
 
     glDrawArrays(GL_TRIANGLES, 0, 3)
 
