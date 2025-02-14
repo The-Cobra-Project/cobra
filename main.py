@@ -2,7 +2,8 @@ import pygame
 from OpenGL.GL import *
 import numpy
 
-from shader import Shader
+from engine.render.shader import Shader
+from engine.math.matrix import Matrix4
 
 SHADERS_DIR = "./shaders"
 
@@ -16,6 +17,8 @@ vertices = numpy.array([
      0,  1,
      1, -1
 ], dtype=numpy.float32)
+
+model = Matrix4(identity=True)
 
 shader = Shader(f"{SHADERS_DIR}/unlit.vert", f"{SHADERS_DIR}/unlit.frag")
 
@@ -36,8 +39,9 @@ while not close:
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glClearColor(BG[0], BG[1], BG[2], BG[3])
-
+    
     shader.use()
+    shader.pass_mat4("model", model)
 
     glDrawArrays(GL_TRIANGLES, 0, 3)
 

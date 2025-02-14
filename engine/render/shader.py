@@ -1,8 +1,10 @@
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
 
+from engine.math.matrix import Matrix4
+
 class Shader:
-    def __init__(self, vertex_path, fragment_path):
+    def __init__(self, vertex_path: str, fragment_path: str):
         vert_src = open(vertex_path, "r").read()
         vertex_shader = compileShader(vert_src, GL_VERTEX_SHADER)
 
@@ -15,3 +17,6 @@ class Shader:
 
     def use(self):
         glUseProgram(self.program)
+
+    def pass_mat4(self, location: str, mat: Matrix4):
+        glUniformMatrix4fv(glGetUniformLocation(self.program, location), 1, False, mat())
