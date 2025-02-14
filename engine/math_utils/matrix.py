@@ -1,16 +1,16 @@
-import numpy
+import numpy as np
 
 class Matrix4:
-    def __init__(self, identity=False):
+    def __init__(self, identity=False) -> None:
         if identity:
-            self.mat = numpy.array([
+            self.mat = np.array([
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
                 [0, 0, 1, 0],
                 [0, 0, 0, 1]
             ])
         else:
-            self.mat = numpy.array([
+            self.mat = np.array([
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],

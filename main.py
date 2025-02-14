@@ -2,8 +2,7 @@ import pygame
 from OpenGL.GL import *
 import numpy
 
-from engine.render.shader import Shader
-from engine.math.matrix import Matrix4
+from engine import *
 
 SHADERS_DIR = "./shaders"
 
