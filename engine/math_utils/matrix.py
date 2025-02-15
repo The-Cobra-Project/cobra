@@ -1,5 +1,9 @@
 import numpy as np
 
+__all__ = [
+    "Matrix4"
+]
+
 class Matrix4:
     def __init__(self, identity=False) -> None:
         if identity:
