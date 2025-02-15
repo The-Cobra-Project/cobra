@@ -1,3 +1,5 @@
+from engine.render.shader import Shader
+
 __all__ = [
-    "shader",
+    "Shader",
 ]
