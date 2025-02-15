@@ -1,1 +1,3 @@
-from shader import *
+__all__ = [
+    "shader",
+]
