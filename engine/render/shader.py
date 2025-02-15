@@ -1,19 +1,28 @@
-from OpenGL.GL import *
+from OpenGL.GL import GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, glDeleteShader, glUseProgram, glUniformMatrix4fv, glGetUniformLocation
 from OpenGL.GL.shaders import compileShader, compileProgram
 
 from engine.math_utils.matrix import Matrix4
 
+__all__ = [
+    "Shader"
+]
+
 class Shader:
     def __init__(self, vertex_path: str, fragment_path: str) -> None:
-        vert_src = open(vertex_path, "r").read()
+        vert_f = open(vertex_path, "r", encoding="utf-8")
+        vert_src = vert_f.read()
         vertex_shader = compileShader(vert_src, GL_VERTEX_SHADER)
 
-        frag_src = open(fragment_path, "r").read()
+        frag_f = open(fragment_path, "r", encoding="utf-8")
+        frag_src = frag_f.read()
         fragment_shader = compileShader(frag_src, GL_FRAGMENT_SHADER)
 
         self.program = compileProgram(vertex_shader, fragment_shader)
         glDeleteShader(vertex_shader)
         glDeleteShader(fragment_shader)
+        vert_f.close()
+        frag_f.close()
+        
 
     def use(self):
         glUseProgram(self.program)

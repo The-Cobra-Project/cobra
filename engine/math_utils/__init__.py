@@ -1,5 +1,5 @@
-from matrix import *
+from .matrix import *
 
 __all__ = [
-    "matrix"
+    "Matrix4"
 ]

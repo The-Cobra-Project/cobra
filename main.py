@@ -2,7 +2,7 @@ import pygame
 from OpenGL.GL import *
 import numpy
 
-from engine import Matrix4, Shader
+from engine import *
 
 SHADERS_DIR = "./shaders"
 
@@ -30,11 +30,11 @@ glBufferData(GL_ARRAY_BUFFER, vertices.size * 4, vertices, GL_STATIC_DRAW)
 glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * 4, None)
 glEnableVertexAttribArray(0)
 
-close = False
-while not close:
+should_close = False
+while not should_close:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            close = True
+            should_close = True
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glClearColor(BG[0], BG[1], BG[2], BG[3])

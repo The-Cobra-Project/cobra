@@ -1,3 +1,5 @@
+"""Provides all the code for matrix handling and calculation"""
+
 import numpy as np
 
 __all__ = [

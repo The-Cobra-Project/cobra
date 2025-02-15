@@ -1,5 +1,5 @@
-from math_utils import *
-from render.shader import Shader
+from .math_utils import *
+from .render import *
 
 __all__ = [
     "Matrix4",
