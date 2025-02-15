@@ -18,6 +18,8 @@ vertices = numpy.array([
 ], dtype=numpy.float32)
 
 model = Matrix4(identity=True)
+model.scale(Vector3(0.7, 0.7, 1))
+model.translate(Vector3(0.5, 0.5, 0))
 
 shader = Shader(f"{SHADERS_DIR}/unlit.vert", f"{SHADERS_DIR}/unlit.frag")
 
