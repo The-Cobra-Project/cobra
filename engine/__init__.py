@@ -1,4 +1,4 @@
-from math_utils.matrix import Matrix4
+from math_utils import *
 from render.shader import Shader
 
 __all__ = [
