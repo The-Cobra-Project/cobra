@@ -53,6 +53,7 @@ clock = pygame.time.Clock()
 t = 0
 while not should_close:
     dt = clock.tick(60) / 1000
+    pygame.display.set_caption(str(round(clock.get_fps())))
 
     model.translate(Vector3(0, math.sin(t) * 0.7, 0))
     model.rotate(Vector3(1, 1, 1), math.radians(45) * dt)
@@ -61,9 +62,7 @@ while not should_close:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     shader.use()
-    shader.pass_mat4("model", model)
-    shader.pass_mat4("view", view)
-    shader.pass_mat4("proj", proj)
+    shader.pass_mat4("mvp", model * view * proj)
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, None)
 

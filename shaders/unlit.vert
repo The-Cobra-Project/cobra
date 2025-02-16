@@ -2,11 +2,8 @@
 
 layout (location = 0) in vec3 vertexPosition;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 proj;
+uniform mat4 mvp;
 
 void main() {
-    vec4 res = proj * view * model * vec4(vertexPosition, 1.0);
-    gl_Position = res;
+    gl_Position = mvp * vec4(vertexPosition, 1.0);
 }

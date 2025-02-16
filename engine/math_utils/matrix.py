@@ -30,39 +30,20 @@ class Matrix4:
         return self.__mat
     
     def __add__(self, other):
-        if type(other) is not Matrix4:
+        if not isinstance(other, Matrix4):
             raise TypeError("Addition between matrices should include same sized matrices!")
         
-        lst = [[], [], [], []]
-        for x, y in np.ndindex(self.__mat.shape):
-            lst[x].insert(y, self.__mat[x][y] + other()[x][y])
-        
-        return Matrix4(False, lst)
+        return Matrix4(False, (self.__mat + other()).tolist())
 
     def __mul__(self, other):
-        if type(other) is int or type(other) is float:
-            lst = [[], [], [], []]
-            for x, y in np.ndindex(self.__mat.shape):
-                lst[x].insert(y, self.__mat[x][y] * other)
-            return Matrix4(False, lst)
-        elif type(other) is Matrix4:
-            lst = [[], [], [], []]
-            for i in range(4):
-                for j in range(4):
-                    n = 0
-                    for k in range(4):
-                        n += self.__mat[i][k] * other()[k][j]
-                    lst[i].insert(j, n)
-            return Matrix4(False, lst)
-        elif type(other) is Vector4:
-            vec = []
-            for i in range(4):
-                for j in range(1):
-                    n = 0
-                    for k in range(4):
-                        n += self.__mat[i][k] * other()[k]
-                    vec.insert(i, n)
-            return Vector4(vec[0], vec[1], vec[2], vec[3])
+        if isinstance(other, (int, float)):
+            return Matrix4(False, (self.__mat * other).tolist())
+        elif isinstance(other, Matrix4):
+            return Matrix4(False, np.matmul(self.__mat, other()).tolist())
+        elif isinstance(other, Vector4):
+            return Vector4(*np.dot(self.__mat, other()))
+        else:
+            raise TypeError("Multiplication with unsupported type")
 
     def get_scale(self) -> Vector3:
         return Vector3(
@@ -101,12 +82,12 @@ class Matrix4:
     @staticmethod
     def perspective(aspect_ratio: float, fov_x: float, z_near: float, z_far: float):
         tangent = tan(fov_x / 2)
-        height = z_near * tangent
-        width = height * aspect_ratio
+        right = z_far * tangent
+        top = right / aspect_ratio
         return Matrix4(False, [
-            [z_near / width, 0, 0, 0],
-            [0, z_near / height, 0, 0],
-            [0, 0, -(z_far + z_near) / (z_far - z_near), -2 * z_far * z_near / (z_far - z_near)],
+            [z_far / right, 0, 0, 0],
+            [0, z_far / top, 0, 0],
+            [0, 0, -(z_near + z_far) / (z_far - z_near), -2 * z_near * z_far / (z_far - z_near)],
             [0, 0, -1, 0]
         ])
 
