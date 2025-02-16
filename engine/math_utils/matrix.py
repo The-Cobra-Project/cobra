@@ -1,5 +1,5 @@
 import numpy as np
-from math import sin, cos
+from math import sin, cos, tan
 
 from .vector import *
 
@@ -10,7 +10,7 @@ __all__ = [
 class Matrix4:
     def __init__(self, identity: bool=False, default: list=None) -> None:
         if default is not None:
-            self.__mat = np.array(default)
+            self.__mat = np.array(default, dtype=np.float32)
         elif identity:
             self.__mat = np.array([
                 [1, 0, 0, 0],
@@ -99,6 +99,14 @@ class Matrix4:
         self.__mat = (self * rotation_matrix)()
 
     @staticmethod
-    def perspective():
-        pass
+    def perspective(aspect_ratio: float, fov_x: float, z_near: float, z_far: float):
+        tangent = tan(fov_x / 2)
+        height = z_near * tangent
+        width = height * aspect_ratio
+        return Matrix4(False, [
+            [z_near / width, 0, 0, 0],
+            [0, z_near / height, 0, 0],
+            [0, 0, -(z_far + z_near) / (z_far - z_near), -2 * z_far * z_near / (z_far - z_near)],
+            [0, 0, -1, 0]
+        ])
 

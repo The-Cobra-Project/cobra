@@ -1,6 +1,7 @@
 import pygame
 from OpenGL.GL import *
 import numpy
+import math
 
 from engine import *
 
@@ -24,9 +25,6 @@ indices = numpy.array([
     1, 2, 3
 ], dtype=numpy.int32)
 
-model = Matrix4(identity=True)
-model.scale(Vector3(0.5, 0.5, 1))
-
 vao = glGenVertexArrays(1)
 vbo = glGenBuffers(1)
 ebo = glGenBuffers(1)
@@ -42,20 +40,31 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size * 4, indices, GL_STATIC_DRAW)
 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * 4, None)
 glEnableVertexAttribArray(0)
 
+glEnable(GL_DEPTH_TEST)
+
+model = Matrix4(identity=True)
+model.scale(Vector3(0.5, 0.5, 0.5))
+view = Matrix4(identity=True)
+view.translate(Vector3(0, 0, -3))
+proj = Matrix4.perspective(800/600, math.radians(45), 0.8, 60)
+
 should_close = False
 clock = pygame.time.Clock()
 t = 0
 while not should_close:
     dt = clock.tick(60) / 1000
-    
-    model.rotate(Vector3(0, 0, 1), dt)
+
+    model.translate(Vector3(0, math.sin(t) * 0.7, 0))
+    model.rotate(Vector3(1, 1, 1), math.radians(45) * dt)
 
     glClearColor(BG[0], BG[1], BG[2], BG[3])
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     shader.use()
     shader.pass_mat4("model", model)
-    
+    shader.pass_mat4("view", view)
+    shader.pass_mat4("proj", proj)
+
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, None)
 
     pygame.display.flip()
