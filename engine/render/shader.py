@@ -1,7 +1,7 @@
-from OpenGL.GL import GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, glDeleteShader, glUseProgram, glUniformMatrix4fv, glGetUniformLocation
+from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
 
-from engine.math_utils.matrix import Matrix4
+from engine.math_utils.matrix import Matrix4, Vector3
 
 __all__ = [
     "Shader"
@@ -29,3 +29,6 @@ class Shader:
 
     def pass_mat4(self, location: str, mat: Matrix4) -> None:
         glUniformMatrix4fv(glGetUniformLocation(self.program, location), 1, False, mat())
+
+    def pass_vec3(self, location: str, vec: Vector3) -> None:
+        glUniform3fv(glGetUniformLocation(self.program, location), 1, vec())
