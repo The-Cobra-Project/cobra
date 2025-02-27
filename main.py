@@ -1,5 +1,6 @@
 import pygame
 from OpenGL.GL import *
+from OpenGL.GLUT import *
 import numpy
 import math
 
@@ -8,12 +9,8 @@ from engine import *
 SHADERS_DIR = "./shaders"
 
 pygame.init()
-pygame.display.gl_set_attribute(pygame.GL_MULTISAMPLEBUFFERS, 1)
-pygame.display.gl_set_attribute(pygame.GL_MULTISAMPLESAMPLES, 4)
 screen = pygame.display.set_mode((800, 600), pygame.OPENGL | pygame.DOUBLEBUF)
 pygame.display.set_caption("Engine Window")
-
-glEnable(GL_MULTISAMPLE)
 
 BG = (204/255, 230/255, 230/255, 1)
 
