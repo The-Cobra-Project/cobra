@@ -11,6 +11,7 @@ class Application:
 
     def run(self) -> None:
         while not self.__window.should_close():
-
+            self.__window.handle_events()
             
             self.__window.swap_buf()
+            

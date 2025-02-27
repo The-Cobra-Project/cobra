@@ -10,11 +10,15 @@ class Window:
         self.__surface = pygame.display.set_mode((size_x, size_y), pygame.OPENGL | pygame.DOUBLEBUF)
         pygame.display.set_caption(caption)
 
+        self.__should_quit = False
+
     def swap_buf(self) -> None:
         pygame.display.flip()
 
-    def should_close(self) -> bool:
+    def handle_events(self) -> None:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
-                return True
-        return False
+                self.__should_quit = True
+
+    def should_close(self) -> bool:
+        return self.__should_quit
