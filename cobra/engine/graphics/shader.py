@@ -1,7 +1,9 @@
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
 
-from engine.math_utils.matrix import Matrix4, Vector3
+from cobra.engine.math import Matrix4, Vector3
+
+import os
 
 __all__ = [
     "Shader"
@@ -32,3 +34,4 @@ class Shader:
 
     def pass_vec3(self, location: str, vec: Vector3) -> None:
         glUniform3fv(glGetUniformLocation(self.__program, location), 1, vec())
+
