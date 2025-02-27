@@ -17,7 +17,7 @@ class Shader:
         frag_src = frag_f.read()
         fragment_shader = compileShader(frag_src, GL_FRAGMENT_SHADER)
 
-        self.program = compileProgram(vertex_shader, fragment_shader)
+        self.__program = compileProgram(vertex_shader, fragment_shader)
         glDeleteShader(vertex_shader)
         glDeleteShader(fragment_shader)
         vert_f.close()
@@ -25,10 +25,10 @@ class Shader:
         
 
     def use(self):
-        glUseProgram(self.program)
+        glUseProgram(self.__program)
 
     def pass_mat4(self, location: str, mat: Matrix4) -> None:
-        glUniformMatrix4fv(glGetUniformLocation(self.program, location), 1, False, mat())
+        glUniformMatrix4fv(glGetUniformLocation(self.__program, location), 1, False, mat())
 
     def pass_vec3(self, location: str, vec: Vector3) -> None:
-        glUniform3fv(glGetUniformLocation(self.program, location), 1, vec())
+        glUniform3fv(glGetUniformLocation(self.__program, location), 1, vec())
