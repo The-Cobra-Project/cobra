@@ -2,12 +2,18 @@ from ..backend import *
 from .world import *
 
 __all__ = [
-    "add_object"
+    "add_object",
+    "init",
+    "run"
 ]
 
-app = Application("Window", 800, 600)
 
 def add_object(obj: Obj):
     app.add_object(obj)
 
-app.run()
+def init():
+    global app
+    app = Application("Window", 800, 600)
+
+def run():
+    app.run()

@@ -3,7 +3,8 @@ __all__ = [
 ]
 
 class Behaviour:
-    def __init__(self): ...
-    
+    def __init__(self, obj):
+        self.obj = obj
+
     def tick(self, dt: float): ...
     def render(self): ...

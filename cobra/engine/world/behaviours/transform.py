@@ -7,10 +7,9 @@ __all__ = [
 ]
 
 class Transform(Behaviour):
-    def __init__(self):
-        self.position = Vector3()
-        self.rotation = Vector3()
-        self.scale = Vector3()
+    position = Vector3()
+    rotation = Vector3()
+    scale = Vector3()
 
     def __call__(self):
         transform = Matrix4(True)

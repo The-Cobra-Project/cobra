@@ -18,6 +18,7 @@ class Application:
             for o in self.__objects:
                 o.tick(dt)
 
+            self.__window.render()
             for o in self.__objects:
                 o.render()
             self.__window.swap_buf()
