@@ -1,7 +1,13 @@
 from ..backend import *
+from .world import *
 
 __all__ = [
-    "start"
+    "add_object"
 ]
 
-Application("Window", 800, 600).run()
+app = Application("Window", 800, 600)
+
+def add_object(obj: Obj):
+    app.add_object(obj)
+
+app.run()

@@ -1,0 +1,9 @@
+__all__ = [
+    "Behaviour"
+]
+
+class Behaviour:
+    def __init__(self): ...
+    
+    def tick(self, dt: float): ...
+    def render(self): ...
