@@ -3,8 +3,6 @@ from OpenGL.GL.shaders import compileShader, compileProgram
 
 from cobra.engine.math import Matrix4, Vector3
 
-import os
-
 __all__ = [
     "Shader"
 ]

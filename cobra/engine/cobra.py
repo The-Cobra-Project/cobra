@@ -1,7 +1,6 @@
 from ..backend import *
 
 __all__ = [
-    "add_object",
     "init",
     "run"
 ]
