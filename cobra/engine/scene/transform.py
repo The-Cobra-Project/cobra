@@ -5,10 +5,10 @@ __all__ = [
 ]
 
 class Transform:
-    def __init__(self, start_position: Vector3 = Vector3(), start_rotation: Vector3 = Vector3(), start_scale: Vector3 = Vector3(1, 1, 1)):
-        self.position = start_position
-        self.rotation = start_rotation
-        self.scale = start_scale
+    def __init__(self):
+        self.position = Vector3()
+        self.rotation = Vector3()
+        self.scale = Vector3(1, 1, 1)
 
     def get_trans_matrix(self):
         trans = Matrix4(True)
