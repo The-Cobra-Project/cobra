@@ -10,22 +10,29 @@ __all__ = [
 class Mesh:
     def __init__(self, vertices: list[Vector3], indices: list[int]):
         self.__vertices = vertices
+        self.__indices = indices
+
         self.__vao = glGenVertexArrays(1)
+        vbo = glGenBuffers(1)
+        self.__ebo = glGenBuffers(1)
+
         glBindVertexArray(self.__vao)
 
-        self.__add_vertex_attrib(self.__list_vec3_to_arr(vertices), 0, 3, GL_FLOAT, False)
+        glBindBuffer(GL_ARRAY_BUFFER, vbo)
+        raw_vert = self.__list_vec3_to_arr(vertices)
+        glBufferData(GL_ARRAY_BUFFER, raw_vert.size * 4, raw_vert, GL_STATIC_DRAW)
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.__ebo)
+        raw_indices = np.array(indices, dtype=np.int32)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, raw_indices.size * 4, raw_indices, GL_STATIC_DRAW)
+
+        glVertexAttribPointer(0, 3, GL_FLOAT, False, 12, None)
+        glEnableVertexAttribArray(0)
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
 
         glBindVertexArray(0)
 
-    def __add_vertex_attrib(self, data: list, index: int, size: int, type: int, normalize: bool):
-        vbo = glGenBuffers(1)
-        glBindBuffer(GL_ARRAY_BUFFER, vbo)
-        glBufferData(GL_ARRAY_BUFFER, len(data) * 4, data, GL_STATIC_DRAW)
-
-        glVertexAttribPointer(index, size, type, normalize, size * 4, None)
-        glEnableVertexAttribArray(index)
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0)
 
     def __list_vec3_to_arr(self, lst: list[Vector3]):
         n = []
@@ -38,4 +45,6 @@ class Mesh:
 
     def draw(self):
         glBindVertexArray(self.__vao)
-        glDrawArrays(GL_TRIANGLES, 0, len(self.__vertices))
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.__ebo)
+        glDrawElements(GL_TRIANGLES, len(self.__indices), GL_UNSIGNED_INT, None)
+        glBindVertexArray(0)

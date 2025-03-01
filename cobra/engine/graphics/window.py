@@ -1,5 +1,6 @@
-import pygame
+from ..math import *
 
+import pygame
 from OpenGL.GL import *
 
 __all__ = [
@@ -7,9 +8,9 @@ __all__ = [
 ]
 
 class Window:
-    def __init__(self, caption: str, size_x: int, size_y: int):
+    def __init__(self, caption: str, dimensions: Vector2):
         pygame.init()
-        self.__surface = pygame.display.set_mode((size_x, size_y), pygame.OPENGL | pygame.DOUBLEBUF)
+        self.__surface = pygame.display.set_mode((dimensions.x, dimensions.y), pygame.OPENGL | pygame.DOUBLEBUF)
         self.__clock = pygame.time.Clock()
         pygame.display.set_caption(caption)
 
@@ -18,7 +19,7 @@ class Window:
     def tick(self, framerate) -> float:
         return self.__clock.tick(framerate) / 1000
 
-    def render(self):
+    def clear(self):
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0.1, 0.1, 0.1, 1)
 
@@ -32,3 +33,6 @@ class Window:
 
     def should_close(self) -> bool:
         return self.__should_quit
+    
+    def get_dimensions(self) -> Vector2:
+        return Vector2(*self.__surface.get_size())
