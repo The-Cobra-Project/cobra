@@ -1,16 +1,20 @@
 from .behaviour import *
 from .behaviours import *
 
+from typing import TypeVar
+
 __all__ = [
     "Obj"
 ]
+
+T = TypeVar("T")
 
 class Obj:
     def __init__(self):
         self.transform = Transform(self)
         self.__behaviours: list[Behaviour] = []
 
-    def add_behaviour(self, behaviour: type[Behaviour]) -> Behaviour:
+    def add_behaviour(self, behaviour: type[T]) -> T:
         b = behaviour(self)
         self.__behaviours.append(b)
         return b
