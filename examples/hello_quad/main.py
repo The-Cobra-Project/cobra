@@ -15,7 +15,7 @@ def main():
     s = Shader("./assets/shaders/unlit.vert", "./assets/shaders/unlit.frag")
 
     camera = Camera(wnd, 70, 1, 100)
-    camera.transform.position.z = -1
+    camera.transform.position.z = -3
     trans = Transform()
 
     while not wnd.should_close():

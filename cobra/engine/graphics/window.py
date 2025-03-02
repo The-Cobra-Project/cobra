@@ -14,13 +14,15 @@ class Window:
         self.__clock = pygame.time.Clock()
         pygame.display.set_caption(caption)
 
+        glEnable(GL_DEPTH_TEST)
+
         self.__should_quit = False
 
     def tick(self, framerate) -> float:
         return self.__clock.tick(framerate) / 1000
 
     def clear(self):
-        glClear(GL_COLOR_BUFFER_BIT)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glClearColor(0.1, 0.1, 0.1, 1)
 
     def swap_buf(self) -> None:

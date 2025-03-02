@@ -15,21 +15,16 @@ def main():
     s = Shader("./assets/shaders/unlit.vert", "./assets/shaders/unlit.frag")
 
     camera = Camera(wnd, 70, 1, 100)
-    camera.transform.position.z = -2
+    camera.transform.position.z = -5
 
     trans1 = Transform()
-    trans1.position.x = -1
-    trans1.scale = Vector3(0.7, 0.7, 0.7)
+    trans1.position = Vector3(1.5, 0, 0)
 
     trans2 = Transform()
-    trans2.position.x = 1
-    trans2.scale = Vector3(0.7, 0.7, 0.7)
-
-    print(trans1.get_trans_matrix()())
-    print(trans2.get_trans_matrix()())
+    trans2.position = Vector3(-1.5, 0, 0)
 
     while not wnd.should_close():
-        dt = wnd.tick(60)
+        dt = wnd.tick(240)
         wnd.poll_events()
 
         wnd.clear()
