@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 __all__ = [
     "Vector2",
@@ -84,6 +85,19 @@ class Vector3:
         if mag == 0:
             return Vector3()
         return self / mag
+    
+    def get_angle(self):
+        return math.atan2(self.y, self.x)
+    
+    def cross(self, other):
+        if type(other) is not Vector3:
+            raise TypeError("Cross product is only defined between two 3D vectors!")
+        
+        return Vector3(
+            self.y * other.z - self.z * other.y,
+            self.z * other.x - self.x * other.z,
+            self.x * other.y - self.y * other.x
+        )
         
             
 class Vector4:
