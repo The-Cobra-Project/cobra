@@ -27,6 +27,9 @@ class Shader:
     def use(self):
         glUseProgram(self.__program)
 
+    def pass_bool(self, location: str, val: bool):
+        glUniform1i(glGetUniformLocation(self.__program, location), val)
+
     def pass_mat4(self, location: str, mat: Matrix4) -> None:
         glUniformMatrix4fv(glGetUniformLocation(self.__program, location), 1, False, mat())
 

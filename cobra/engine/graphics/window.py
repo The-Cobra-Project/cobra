@@ -21,9 +21,9 @@ class Window:
     def tick(self, framerate) -> float:
         return self.__clock.tick(framerate) / 1000
 
-    def clear(self):
+    def clear(self, color: Vector3):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        glClearColor(0.1, 0.1, 0.1, 1)
+        glClearColor(*color(), 1)
 
     def swap_buf(self) -> None:
         pygame.display.flip()

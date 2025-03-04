@@ -11,6 +11,11 @@ def main():
     ], [
         0, 1, 3,
         1, 2, 3
+    ], [
+        Vector3(0, 1, 0),
+        Vector3(0, 1, 0),
+        Vector3(0, 1, 0),
+        Vector3(0, 1, 0),
     ])
     unlit = Shader("./assets/shaders/unlit.vert", "./assets/shaders/unlit.frag")
 
@@ -22,7 +27,7 @@ def main():
         dt = wnd.tick(60)
         wnd.poll_events()
 
-        wnd.clear()
+        wnd.clear(Vector3(0.05, 0.05, 0.05))
 
         unlit.use()
         unlit.pass_mat4("mvp", camera.get_mvp(trans))
