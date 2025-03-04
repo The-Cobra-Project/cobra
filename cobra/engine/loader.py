@@ -53,7 +53,7 @@ def load_mesh(path: str) -> Mesh:
                     ])
 
     # If no normals were found in the file, generate them
-    if not has_normal_data:
+    if True:
         # Reset vertex normals
         vertex_normals = [Vector3(0, 0, 0) for _ in range(len(vertices))]
         
