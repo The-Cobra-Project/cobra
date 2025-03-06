@@ -1,2 +1,2 @@
 Installation:
-    pip install cobra-engine
+```pip install cobra-engine```
