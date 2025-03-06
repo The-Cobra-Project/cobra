@@ -1,7 +1,26 @@
 [build-system]
 requires = ["setuptools>=61.0", ]
 build-backend = "setuptools.build_meta"
+
 [project]
-dynamic = ["dependencies"]
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+name = "cobra-engine"
+version = "0.1.0"
+authors = [
+  { name="Ron Shani", email="ronshan4u@gmail.com" },
+]
+description = "A tiny portable OpenGL framework using PyGame"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Environment :: GPU",
+    "Intended Audience :: Developers",
+    "Topic :: Games/Entertainment"
+]
+
+[project.urls]
+Homepage = "https://github.com/The-Cobra-Project/cobra"
+Issues = "https://github.com/The-Cobra-Project/cobra/issues"
