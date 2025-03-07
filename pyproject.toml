@@ -9,7 +9,7 @@ dependencies = [
     "PyOpenGL"
 ]
 name = "cobra-engine"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Ron Shani", email="ronshan4u@gmail.com" },
 ]
